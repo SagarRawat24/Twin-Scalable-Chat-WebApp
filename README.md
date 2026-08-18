@@ -8,3 +8,10 @@
     src="https://github.com/user-attachments/assets/2409334e-98a0-45a4-b44b-d953c08355cb"
   />
 </p>
+
+
+<p align="center">
+  A Real-Time Full stack Chat WebApp. Its support one to one messaging and Group chat 
+  It build with Typescript and Socket.io library and Scale horizontally with the help
+  of Redis infrastructure 
+</p>
