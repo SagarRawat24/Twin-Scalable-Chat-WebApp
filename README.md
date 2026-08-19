@@ -64,4 +64,25 @@
 
 </div>
 
+## ✨ Features
+
+- **Real-Time Messaging** — Instant one-to-one and group chat powered by Socket.IO, with messages delivered live to both sender and receiver without page refresh.
+
+- **Image Sharing** — Send images in both DMs and group chats via Cloudinary-backed uploads, with WhatsApp-style previews, captions, and timestamp overlays on the image itself.
+
+- **Live Online/Offline Presence** — See who's online in real time via a `Map<userId, Set<socketId>>`-based presence tracker that correctly handles multiple tabs/devices per user.
+
+- **Persistent Chat History with Pagination** — Cursor-based "load more" pagination for both DM and group chat history, so old messages load smoothly without fetching the entire conversation at once.
+
+- **Secure Cookie-Based Authentication** — Auth handled via Better Auth with email/password and Google OAuth sign-in, multi-session support (up to 5 sessions per user), and HTTP-only cookies.
+
+- **Dynamic Chat List with Live Updates** — Contact list updates automatically via Server-Sent Events (SSE) + PostgreSQL LISTEN/NOTIFY whenever a new chat is added — no manual refresh needed.
+
+- **Horizontally Scalable Backend** — Socket.IO is backed by a Redis pub/sub adapter (sharded adapter with `ioredis`), enabling the real-time layer to scale across multiple server instances.
+
+- **Smart Query Caching with TanStack Query** — Chat list and group list are fetched and cached via React Query, with `staleTime: 0` + `refetchOnMount` ensuring data is always fresh the moment a user opens the app, without over-fetching on every render.
+
+- **Centralized State with Zustand** — Lightweight, boilerplate-free global state (selected chat, group creation flow, online users, sidebar toggles) managed via multiple focused Zustand stores instead of one bloated context/provider.
+
+- **Debounced Search to Cut Redundant API Calls** — User search input is debounced (700ms) before hitting the backend, paired with React Query's `enabled` flag so no request fires until the user actually stops typing — reducing unnecessary network load.
 
