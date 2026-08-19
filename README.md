@@ -86,3 +86,155 @@
 
 - **Debounced Search to Cut Redundant API Calls** — User search input is debounced (700ms) before hitting the backend, paired with React Query's `enabled` flag so no request fires until the user actually stops typing — reducing unnecessary network load.
 
+
+## 📁 Folder Structure
+
+```
+Twin-Scalable-Chat-WebApp/
+├── backend/
+│   ├── src/
+│   │   ├── db/
+│   │   │   ├── schema.ts          # Drizzle schema (users, messages, groups)
+│   │   │   ├── db.ts              # Postgres connection (node-postgres pool)
+│   │   │   └── migrate.ts         # Migration runner
+│   │   ├── lib/
+│   │   │   ├── auth.ts            # Better Auth config (email/password + Google OAuth)
+│   │   │   ├── cloudinary.ts      # Cloudinary config
+│   │   │   └── redisclient.ts     # ioredis pub/sub clients
+│   │   ├── Middleware/
+│   │   │   └── auth.middle.ts     # Session-based auth middleware
+│   │   ├── modules/
+│   │   │   └── chatService.ts     # DM & group message business logic
+│   │   ├── routes/
+│   │   │   ├── fetchmessages.ts       # GET direct messages (paginated)
+│   │   │   ├── fetchGroupMsg.ts       # GET group messages (paginated)
+│   │   │   ├── chatList.routes.ts     # Chat list + SSE live updates
+│   │   │   ├── Groupdata.ts           # Create group / fetch user's groups
+│   │   │   ├── uploadimage.ts         # Cloudinary image upload
+│   │   │   ├── AllUserGroup.ts        # Fetch all users (for group creation)
+│   │   │   └── user.search.routes.ts  # Debounced user search
+│   │   ├── socket/
+│   │   │   └── socket.ts          # Socket.IO server + Redis sharded adapter
+│   │   ├── Types/
+│   │   │   └── express.d.ts       # Express Request type extensions
+│   │   ├── listenClient.ts        # Postgres LISTEN/NOTIFY client
+│   │   └── index.ts               # App entry point
+│   ├── drizzle/                   # Drizzle migrations & snapshots
+│   ├── drizzle.config.ts
+│   └── package.json
+│
+├── frontend/
+│   ├── app/
+│   │   ├── (auth)/
+│   │   │   ├── signin/page.tsx
+│   │   │   └── signup/page.tsx
+│   │   ├── profile/page.tsx
+│   │   ├── layout.tsx
+│   │   ├── page.tsx                # Main chat screen
+│   │   └── provider.tsx            # React Query + Theme providers
+│   ├── component/
+│   │   ├── Chat.tsx                # Main chat window (DM + group)
+│   │   ├── UsersUi.tsx             # Sidebar chat/group list
+│   │   ├── sidebar.tsx             # User search panel
+│   │   ├── AddUserGroup.tsx        # Group creation modal
+│   │   ├── Messagebubble.tsx       # DM message bubble
+│   │   ├── MessageGroupBubble.tsx  # Group message bubble
+│   │   ├── imagepreview.tsx        # WhatsApp-style image preview panel
+│   │   ├── navbar.tsx
+│   │   └── darkmode.tsx
+│   ├── hooks/
+│   │   ├── useChat.ts              # Socket listeners + message state
+│   │   ├── useUserList.ts          # Chat list + group list queries
+│   │   └── Usededounce.ts          # Debounce hook
+│   ├── Store/                      # Zustand stores
+│   │   ├── chatbox.ts              # Selected chat state
+│   │   ├── GroupStrore.ts          # Group creation flow state
+│   │   ├── onlineusers.ts          # Online presence state
+│   │   └── toggle.tsx              # Sidebar/modal toggles
+│   ├── lib/
+│   │   ├── socket.ts               # Socket.IO client singleton
+│   │   ├── auth_client.ts          # Better Auth React client
+│   │   └── utils.ts
+│   ├── types/
+│   │   └── chalist.ts              # Shared TypeScript types
+│   └── package.json
+│
+└── README.md
+```
+
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js (v18+)
+- PostgreSQL database
+- Redis instance
+- Cloudinary account (for image uploads)
+- Google OAuth credentials (optional, for social login)
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/SagarRawat24/Twin-Scalable-Chat-WebApp.git
+cd Twin-Scalable-Chat-WebApp
+```
+
+### 2. Backend Setup
+```bash
+cd backend
+npm install
+```
+
+Create a `.env` file in `backend/` with:
+```env
+DATABASE_URL=postgresql://user:password@localhost:5432/line_db
+REDIS_URL=redis://localhost:6379
+BETTER_AUTH_BACKEND=http://localhost:8000
+BETTER_AUTH_URL=http://localhost:3000
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+PORT=8000
+```
+
+Push the database schema:
+```bash
+npx drizzle-kit push
+```
+
+Start the backend:
+```bash
+npm run dev
+```
+
+### 3. Frontend Setup
+Open a new terminal:
+```bash
+cd frontend
+npm install
+```
+
+Create a `.env.local` file in `frontend/` with:
+```env
+NEXT_PUBLIC_BACKEND_URL=http://localhost:8000
+```
+
+Start the frontend:
+```bash
+npm run dev
+```
+
+### 4. Open the app
+Visit **http://localhost:3000** in your browser 🎉
+
+> 💡 To test real-time chat, open two browser windows (or one in incognito) and sign in as two different users.
+
+### 🧪 Scaling Test (optional)
+To verify horizontal scaling with the Redis adapter, run two backend instances on different ports:
+```bash
+PORT=8000 npm run dev
+PORT=8001 npm run dev
+```
+Messages sent from a client connected to one instance should still reach a client connected to the other, proving the Redis pub/sub adapter is working correctly.
+
