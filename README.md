@@ -34,6 +34,8 @@
 
 <div>
 
+### 🚀 Tech Stack
+
 <h2>🎨 Frontend</h2>
 
 <p>
