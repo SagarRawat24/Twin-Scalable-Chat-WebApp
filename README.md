@@ -24,7 +24,8 @@
 </p>
 
 <p align="center">
- <img width="100%"  alt="cursorful-video-1787146180010 (1)" src="https://github.com/user-attachments/assets/3d88f19e-6e22-42bb-8ec7-32e61edb01fc" />
+<img width="100%"  alt="cursorful-video-1787146180010 (2)" src="https://github.com/user-attachments/assets/54eca076-eeeb-45bb-8934-c0b3149dc95c" />
+
 </p>
 
 
