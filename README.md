@@ -22,7 +22,7 @@
   of Redis infrastructure 
 </p>
 
-<img width="110" height="56" alt="cursorful-video-1787144548608 (1)" src="https://github.com/user-attachments/assets/467cae9b-41c8-4c26-9c05-e202d5f945be" />
+## <img width="110" height="56" alt="cursorful-video-1787144548608 (1)" src="https://github.com/user-attachments/assets/467cae9b-41c8-4c26-9c05-e202d5f945be" />
 
 
 
