@@ -238,3 +238,9 @@ PORT=8001 npm run dev
 ```
 Messages sent from a client connected to one instance should still reach a client connected to the other, proving the Redis pub/sub adapter is working correctly.
 
+## 🗃️ Database Schema
+
+<img width="2472" height="1245" alt="schema" src="https://github.com/user-attachments/assets/1d73ac61-faf0-4e77-b4db-c6d56a64dc35" />
+
+
+
