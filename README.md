@@ -4,6 +4,7 @@
 
 
 
+
 <p align="center">
   <img
     width="70"
@@ -23,7 +24,7 @@
 </p>
 
 <p align="center">
- <img width="100%"  alt="cursorful-video-1787144548608 (1)" src="https://github.com/user-attachments/assets/467cae9b-41c8-4c26-9c05-e202d5f945be" />
+ <img width="100%"  alt="cursorful-video-1787146180010 (1)" src="https://github.com/user-attachments/assets/3d88f19e-6e22-42bb-8ec7-32e61edb01fc" />
 </p>
 
 
